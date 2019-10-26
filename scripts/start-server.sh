@@ -90,6 +90,14 @@ fi
 
 sed -i '/"width"/c\  "width" : '${CUSTOM_RES_W}',' "${DATA_DIR}/cfg/org.jdownloader.settings.GraphicalUserInterfaceSettings.lastframestatus.json"
 sed -i '/"height"/c\  "height" : '${CUSTOM_RES_H}',' "${DATA_DIR}/cfg/org.jdownloader.settings.GraphicalUserInterfaceSettings.lastframestatus.json"
+if [ ! -f "${DATA_DIR}/cfg/org.jdownloader.settings.GeneralSettings.json" ]; then
+    cd "${DATA_DIR}/cfg"
+    touch "org.jdownloader.settings.GeneralSettings.json"
+	echo '{
+  "defaultdownloadfolder" : "/mnt/jDownloader"
+}' >> "${DATA_DIR}/cfg/org.jdownloader.settings.GeneralSettings.json"
+fi
+sed -i '/Downloads"/c\  "defaultdownloadfolder" : "\/mnt\/jDownloader",' "${DATA_DIR}/cfg/org.jdownloader.settings.GeneralSettings.json"
 echo "---Window resolution: ${CUSTOM_RES_W}x${CUSTOM_RES_H}---"
 
 chmod -R 770 ${DATA_DIR}
