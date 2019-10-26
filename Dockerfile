@@ -9,6 +9,8 @@ RUN apt-get -y install wget xvfb wmctrl x11vnc fluxbox screen novnc language-pac
 ENV LANG=en_US.utf8
 
 ENV DATA_DIR=/jDownloader2
+ENV CUSTOM_RES_W=1280
+ENV CUSTOM_RES_H=1024
 ENV RUNTIME_NAME="jre1.8.0_211"
 ENV UID=99
 ENV GID=100
