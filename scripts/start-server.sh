@@ -66,6 +66,32 @@ if [ "${CUSTOM_RES_H}" -le 768 ]; then
     CUSTOM_RES_H=768
 fi
 
+if [ ! -d ${DATA_DIR}/cfg ]; then
+	mkdir ${DATA_DIR}/cfg
+fi
+
+if [ ! -f "${DATA_DIR}/cfg/org.jdownloader.settings.GraphicalUserInterfaceSettings.lastframestatus.json" ]; then
+    cd "${DATA_DIR}/cfg"
+    touch "org.jdownloader.settings.GraphicalUserInterfaceSettings.lastframestatus.json"
+	echo '{
+  "extendedState" : "NORMAL",
+  "width" : '${CUSTOM_RES_W}',
+  "height" : '${CUSTOM_RES_H}',
+  "x" : 0,
+  "visible" : true,
+  "y" : 0,
+  "silentShutdown" : false,
+  "screenID" : ":0.0",
+  "locationSet" : true,
+  "focus" : true,
+  "active" : true
+}' >> "${DATA_DIR}/cfg/org.jdownloader.settings.GraphicalUserInterfaceSettings.lastframestatus.json"
+fi
+
+sed -i '/"width"/c\  "width" : '${CUSTOM_RES_W}',' "${DATA_DIR}/cfg/org.jdownloader.settings.GraphicalUserInterfaceSettings.lastframestatus.json"
+sed -i '/"height"/c\  "height" : '${CUSTOM_RES_H}',' "${DATA_DIR}/cfg/org.jdownloader.settings.GraphicalUserInterfaceSettings.lastframestatus.json"
+echo "---Window resolution: ${CUSTOM_RES_W}x${CUSTOM_RES_H}---"
+
 chmod -R 770 ${DATA_DIR}
 
 echo "---Starting Xvfb server---"
