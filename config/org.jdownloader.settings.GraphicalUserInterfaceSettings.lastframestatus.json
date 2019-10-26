@@ -1,0 +1,13 @@
+{
+  "extendedState" : "NORMAL",
+  "width" : 1280,
+  "height" : 800,
+  "x" : 0,
+  "visible" : true,
+  "y" : 0,
+  "silentShutdown" : false,
+  "screenID" : ":0.0",
+  "locationSet" : true,
+  "focus" : true,
+  "active" : true
+}
