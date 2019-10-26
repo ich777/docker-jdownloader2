@@ -28,11 +28,11 @@ else
 fi
 
 echo "---Checking for 'jDownloader.jar'---"
-if [ ! -f ${DATA_DIR}/jDownloader.jar ]; then
+if [ ! -f ${DATA_DIR}/JDownloader.jar ]; then
 	echo "---'jDownloader.jar' not found, downloading...---"
 	cd ${DATA_DIR}
-    wget -qi jDownloader.jar https://github.com/ich777/docker-jdownloader2/raw/master/JD/JDownloader.jar
-	if [ ! -f ${DATA_DIR}/jDownloader.jar ]; then
+    wget -qi JDownloader.jar https://github.com/ich777/docker-jdownloader2/raw/master/JD/JDownloader.jar
+	if [ ! -f ${DATA_DIR}/JDownloader.jar ]; then
 		echo "-----------------------------------------------------------------------------------------"
 		echo "---Something went wrong can't download 'jDownloader.jar' Putting server in sleep mode!---"
 		echo "-----------------------------------------------------------------------------------------"
