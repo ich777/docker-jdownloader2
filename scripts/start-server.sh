@@ -48,6 +48,24 @@ find $DATA_DIR -name "XvfbLog.*" -exec rm -f {} \;
 find $DATA_DIR -name "x11vncLog.*" -exec rm -f {} \;
 echo "---Checking for old display lock files---"
 find /tmp -name ".X99*" -exec rm -f {} \;
+
+echo "---Resolution check---"
+if [ -z "${CUSTOM_RES_W} ]; then
+	CUSTOM_RES_W=1024
+fi
+if [ -z "${CUSTOM_RES_H} ]; then
+	CUSTOM_RES_H=768
+fi
+
+if [ "${CUSTOM_RES_W}" -le 1024 ]; then
+	echo "---Width to low must be a minimal of 1024 pixels, correcting to 1024...---"
+    CUSTOM_RES_W=1024
+fi
+if [ "${CUSTOM_RES_H}" -le 768 ]; then
+	echo "---Height to low must be a minimal of 768 pixels, correcting to 768...---"
+    CUSTOM_RES_H=768
+fi
+
 chmod -R 770 ${DATA_DIR}
 
 echo "---Starting Xvfb server---"
