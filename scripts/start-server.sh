@@ -100,6 +100,9 @@ fi
 sed -i '/Downloads"/c\  "defaultdownloadfolder" : "\/mnt\/jDownloader",' "${DATA_DIR}/cfg/org.jdownloader.settings.GeneralSettings.json"
 echo "---Window resolution: ${CUSTOM_RES_W}x${CUSTOM_RES_H}---"
 
+echo "---Setting umask to ${UMASK}---"
+umask ${UMASK}
+
 chmod -R 770 ${DATA_DIR}
 
 echo "---Starting Xvfb server---"
