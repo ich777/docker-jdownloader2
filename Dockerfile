@@ -7,6 +7,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ENV TZ=Europe/Rome
 RUN apt-get -y install wget xvfb wmctrl x11vnc fluxbox screen novnc language-pack-en
 ENV LANG=en_US.utf8
+RUN sed -i '/    document.title =/c\    document.title = "jDownloader2 - noVNC";' /usr/share/novnc/include/ui.js
 
 ENV DATA_DIR=/jDownloader2
 ENV CUSTOM_RES_W=1280
@@ -23,6 +24,8 @@ RUN chown -R jdownloader $DATA_DIR
 RUN ulimit -n 2048
 
 ADD /scripts/ /opt/scripts/
+RUN rm /usr/share/novnc/favicon.ico
+COPY /jdownloader.ico /usr/share/novnc/favicon.ico
 RUN chmod -R 770 /opt/scripts/
 RUN chown -R jdownloader /opt/scripts
 RUN chmod -R 770 /mnt
