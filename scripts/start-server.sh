@@ -1,4 +1,7 @@
 #!/bin/bash
+echo "---Setting umask to ${UMASK}---"
+umask ${UMASK}
+
 echo "---Checking for 'runtime' folder---"
 if [ ! -d ${DATA_DIR}/runtime ]; then
 	echo "---'runtime' folder not found, creating...---"
@@ -100,10 +103,7 @@ fi
 sed -i '/Downloads"/c\  "defaultdownloadfolder" : "\/mnt\/jDownloader",' "${DATA_DIR}/cfg/org.jdownloader.settings.GeneralSettings.json"
 echo "---Window resolution: ${CUSTOM_RES_W}x${CUSTOM_RES_H}---"
 
-echo "---Setting umask to ${UMASK}---"
-umask ${UMASK}
-
-chmod -R 770 ${DATA_DIR}
+chmod -R 777 ${DATA_DIR}
 
 echo "---Starting Xvfb server---"
 screen -S Xvfb -L -Logfile ${DATA_DIR}/XvfbLog.0 -d -m /opt/scripts/start-Xvfb.sh
