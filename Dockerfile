@@ -31,6 +31,7 @@ RUN chmod -R 770 /opt/scripts/
 RUN chown -R jdownloader /opt/scripts
 RUN chmod -R 770 /mnt
 RUN chown -R jdownloader /mnt
+RUN chmod 751 /usr/bin/x11vnc
 
 USER jdownloader
 
