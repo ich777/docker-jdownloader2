@@ -26,6 +26,7 @@ RUN ulimit -n 2048
 ADD /scripts/ /opt/scripts/
 RUN rm /usr/share/novnc/favicon.ico
 COPY /jdownloader.ico /usr/share/novnc/favicon.ico
+COPY /x11vnc /usr/bin/x11vnc
 RUN chmod -R 770 /opt/scripts/
 RUN chown -R jdownloader /opt/scripts
 RUN chmod -R 770 /mnt
