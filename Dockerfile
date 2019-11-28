@@ -5,7 +5,7 @@ MAINTAINER ich777
 RUN apt-get update
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ENV TZ=Europe/Rome
-RUN apt-get -y install wget xvfb wmctrl x11vnc fluxbox screen novnc language-pack-en
+RUN apt-get -y install wget xvfb wmctrl x11vnc fluxbox screen novnc language-pack-en language-pack-ko language-pack-ja fonts-takao
 ENV LANG=en_US.utf8
 RUN sed -i '/    document.title =/c\    document.title = "jDownloader2 - noVNC";' /usr/share/novnc/include/ui.js
 
