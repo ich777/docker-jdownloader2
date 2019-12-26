@@ -8,7 +8,7 @@ RUN export TZ=Europe/Rome && \
 	echo $TZ > /etc/timezone && \
 	apt-get -y install xvfb wmctrl x11vnc fluxbox screen novnc fonts-takao && \
 	rm -rf /var/lib/apt/lists/* && \
-	sed -i '/    document.title =/c\    document.title = "jDownloader2 - noVNC";' /usr/share/novnc/include/ui.js
+
 
 ENV DATA_DIR=/jDownloader2
 ENV CUSTOM_RES_W=1280
