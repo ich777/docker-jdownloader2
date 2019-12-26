@@ -24,8 +24,6 @@ RUN mkdir $DATA_DIR && \
 	ulimit -n 2048
 
 ADD /scripts/ /opt/scripts/
-RUN rm /usr/share/novnc/favicon.ico
-COPY /jdownloader.ico /usr/share/novnc/favicon.ico
 COPY /x11vnc /usr/bin/x11vnc
 RUN chmod -R 770 /opt/scripts/ && \
 	chown -R jdownloader /opt/scripts && \
