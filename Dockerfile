@@ -7,7 +7,7 @@ RUN export TZ=Europe/Rome && \
 	ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
 	echo $TZ > /etc/timezone && \
 	apt-get -y install xvfb wmctrl x11vnc fluxbox screen novnc fonts-takao && \
-	rm -rf /var/lib/apt/lists/* && \
+	rm -rf /var/lib/apt/lists/*
 
 
 ENV DATA_DIR=/jDownloader2
