@@ -7,8 +7,8 @@ RUN export TZ=Europe/Rome && \
 	ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
 	echo $TZ > /etc/timezone && \
 	apt-get -y install --no-install-recommends xvfb wmctrl x11vnc fluxbox screen novnc fonts-takao && \
-	echo "ko_KR.UTF-8 UTF-8
-ja_JP.UTF-8 UTF-8" >> /etc/locale.gen && \
+	echo "ko_KR.UTF-8 UTF-8" >> /etc/locale.gen && \ 
+	echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen && \
 	locale-gen && \
 	rm -rf /var/lib/apt/lists/* && \
 	sed -i '/    document.title =/c\    document.title = "jDownloader2 - noVNC";' /usr/share/novnc/app/ui.js && \
