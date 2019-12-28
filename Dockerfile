@@ -29,13 +29,11 @@ RUN mkdir $DATA_DIR && \
 	ulimit -n 2048
 
 ADD /scripts/ /opt/scripts/
-COPY /x11vnc /usr/bin/x11vnc
 COPY /icons/* /usr/share/novnc/app/images/icons/
 RUN chmod -R 770 /opt/scripts/ && \
 	chown -R jdownloader /opt/scripts && \
 	chmod -R 770 /mnt && \
 	chown -R jdownloader /mnt && \
-	chmod 751 /usr/bin/x11vnc
 
 USER jdownloader
 
