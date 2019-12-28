@@ -12,12 +12,17 @@ fi
 
 echo "---Checking if Runtime is installed---"
 if [ -z "$(find ${DATA_DIR}/runtime -name jre*)" ]; then
-    if [ "${RUNTIME_NAME}" == "jre1.8.0_211" ]; then
+    if [ "${RUNTIME_NAME}" == "basicjre" ]; then
     	echo "---Downloading and installing Runtime---"
 		cd ${DATA_DIR}/runtime
-		wget -qi ${RUNTIME_NAME} https://github.com/ich777/docker-minecraft-basic-server/raw/master/runtime/8u211.tar.gz
-        tar --directory ${DATA_DIR}/runtime -xvzf ${DATA_DIR}/runtime/8u211.tar.gz
-        rm -R ${DATA_DIR}/runtime/8u211.tar.gz
+		if wget -q -nc --show-progress --progress=bar:force:noscroll https://github.com/ich777/runtimes/raw/master/jre/basicjre.tar.gz ; then
+			echo "---Successfully downloaded Runtime!---"
+		else
+			echo "---Something went wrong, can't download Runtime, putting server in sleep mode---"
+			sleep infinity
+		fi
+        tar --directory ${DATA_DIR}/runtime -xvzf ${DATA_DIR}/runtime/basicjre.tar.gz
+        rm -R ${DATA_DIR}/runtime/basicjre.tar.gz
     else
     	if [ ! -d ${DATA_DIR}/runtime/${RUNTIME_NAME} ]; then
         	echo "---------------------------------------------------------------------------------------------"
@@ -46,6 +51,7 @@ else
 fi
 
 echo "---Preparing Server---"
+export RUNTIME_NAME="$(ls -d ${DATA_DIR}/runtime/* | cut -d '/' -f4)"
 echo "---Checking for old logfiles---"
 find $DATA_DIR -name "XvfbLog.*" -exec rm -f {} \;
 find $DATA_DIR -name "x11vncLog.*" -exec rm -f {} \;
