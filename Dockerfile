@@ -33,7 +33,7 @@ COPY /icons/* /usr/share/novnc/app/images/icons/
 RUN chmod -R 770 /opt/scripts/ && \
 	chown -R jdownloader /opt/scripts && \
 	chmod -R 770 /mnt && \
-	chown -R jdownloader /mnt && \
+	chown -R jdownloader /mnt
 
 USER jdownloader
 
