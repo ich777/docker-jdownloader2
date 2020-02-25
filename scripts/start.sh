@@ -16,8 +16,7 @@ else
 fi
 
 echo "---Starting...---"
-chown ${UID}:${GID} /opt/scripts
-chown ${UID}:${GID} /opt/scripts/start-server.sh
+chown -R ${UID}:${GID} /opt/scripts
 chown -R ${UID}:${GID} /mnt
 chmod -R 770 /mnt
 su ${USER} -c "/opt/scripts/start-server.sh"
