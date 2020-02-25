@@ -17,6 +17,4 @@ fi
 
 echo "---Starting...---"
 chown -R ${UID}:${GID} /opt/scripts
-chown -R ${UID}:${GID} /mnt
-chmod -R 770 /mnt
 su ${USER} -c "/opt/scripts/start-server.sh"
