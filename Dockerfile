@@ -32,7 +32,9 @@ RUN mkdir $DATA_DIR && \
 
 ADD /scripts/ /opt/scripts/
 COPY /icons/* /usr/share/novnc/app/images/icons/
-RUN chmod -R 770 /opt/scripts/
+RUN chmod -R 770 /opt/scripts/ && \
+	chown -R ${UID}:${GID} /mnt && \
+	chmod -R 770 /mnt
 
 #Server Start
 ENTRYPOINT ["/opt/scripts/start.sh"]
