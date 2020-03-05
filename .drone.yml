@@ -7,8 +7,7 @@ steps:
   settings:
     dockerfile: Dockerfile
     repo: ich777/jdownloader2
-    username:
-      from_secret: docker_username
+    username: ich777
     password:
       from_secret: docker_password
     tags: latest
