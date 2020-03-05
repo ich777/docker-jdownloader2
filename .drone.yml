@@ -1,0 +1,14 @@
+kind: pipeline
+name: jdownloader2
+
+steps:
+- name: docker
+  image: plugins/docker
+  settings:
+    dockerfile: Dockerfile
+    repo: ich777/jdownloader2
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    tags: latest
