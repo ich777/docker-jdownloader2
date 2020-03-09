@@ -49,6 +49,35 @@ fi
 
 echo "---Preparing Server---"
 export RUNTIME_NAME="$(ls -d ${DATA_DIR}/runtime/* | cut -d '/' -f4)"
+
+echo "---Checking librarys---"
+if [ ! -d ${DATA_DIR}/libs ]; then
+	mkdir ${DATA_DIR}/libs
+fi
+if [ ! -f ${DATA_DIR}/libs/sevenzipjbinding1509Linux.jar ]; then
+	cd ${DATA_DIR}/libs
+	if wget -q -nc --show-progress --progress=bar:force:noscroll https://github.com/ich777/runtimes/raw/master/jd/lib.tar.gz ; then
+		echo "---Successfully downloaded librarys---"
+	else
+		echo "---Something went wrong, can't download librarys, continuing---"
+	fi
+    if [ -f ${DATA_DIR}/libs/lib.tar.gz ]; then
+    	tar -xvf ${DATA_DIR}/libs/lib.tar.gz
+    	rm ${DATA_DIR}/libs/lib.tar.gz
+	fi
+else
+	echo "---Librarys found!---"
+fi
+sleep 1
+if [ ! -f ${DATA_DIR}/libs/sevenzipjbinding1509.jar ]; then
+	cd ${DATA_DIR}/libs
+	wget -q -nc --show-progress --progress=bar:force:noscroll https://github.com/ich777/runtimes/raw/master/jd/lib.tar.gz
+    if [ -f ${DATA_DIR}/libs/lib.tar.gz ]; then
+    	tar -xvf ${DATA_DIR}/libs/lib.tar.gz
+    	rm ${DATA_DIR}/libs/lib.tar.gz
+	fi
+fi
+
 echo "---Checking for old logfiles---"
 find $DATA_DIR -name "XvfbLog.*" -exec rm -f {} \;
 find $DATA_DIR -name "x11vncLog.*" -exec rm -f {} \;
