@@ -62,7 +62,7 @@ if [ ! -f ${DATA_DIR}/libs/sevenzipjbinding1509Linux.jar ]; then
 		echo "---Something went wrong, can't download libraries, continuing---"
 	fi
     if [ -f ${DATA_DIR}/libs/lib.tar.gz ]; then
-    	tar -xvf ${DATA_DIR}/libs/lib.tar.gz
+    	tar -xf ${DATA_DIR}/libs/lib.tar.gz
     	rm ${DATA_DIR}/libs/lib.tar.gz
 	fi
 else
@@ -72,7 +72,7 @@ if [ ! -f ${DATA_DIR}/libs/sevenzipjbinding1509.jar ]; then
 	cd ${DATA_DIR}/libs
 	wget -q -nc --show-progress --progress=bar:force:noscroll https://github.com/ich777/runtimes/raw/master/jd/lib.tar.gz
     if [ -f ${DATA_DIR}/libs/lib.tar.gz ]; then
-    	tar -xvf ${DATA_DIR}/libs/lib.tar.gz
+    	tar -xf ${DATA_DIR}/libs/lib.tar.gz
     	rm ${DATA_DIR}/libs/lib.tar.gz
 	fi
 fi
