@@ -66,7 +66,7 @@ if [ ! -f ${DATA_DIR}/libs/sevenzipjbinding1509Linux.jar ]; then
     	rm ${DATA_DIR}/libs/lib.tar.gz
 	fi
 else
-	echo "---libraries found!---"
+	echo "---Libraries found!---"
 fi
 if [ ! -f ${DATA_DIR}/libs/sevenzipjbinding1509.jar ]; then
 	cd ${DATA_DIR}/libs
