@@ -35,13 +35,13 @@ fi
 echo "---Checking for 'jDownloader.jar'---"
 sleep 5
 if [ ! -f ${DATA_DIR}/JDownloader.jar ]; then
-	echo "---'jDownloader.jar' not found, downloading...---"
+	echo "---'jDownloader.jar' not found, copying...---"
 	cd ${DATA_DIR}
-    wget -qi JDownloader.jar https://github.com/ich777/docker-jdownloader2/raw/master/JD/JDownloader.jar
+	cp /tmp/JDownloader.jar ${DATA_DIR}/JDownloader.jar
 	if [ ! -f ${DATA_DIR}/JDownloader.jar ]; then
-		echo "-----------------------------------------------------------------------------------------"
-		echo "---Something went wrong can't download 'jDownloader.jar' Putting server in sleep mode!---"
-		echo "-----------------------------------------------------------------------------------------"
+		echo "--------------------------------------------------------------------------------------"
+		echo "---Something went wrong can't copy 'jDownloader.jar', putting server in sleep mode!---"
+		echo "--------------------------------------------------------------------------------------"
 		sleep infinity
 	fi
 else
@@ -57,10 +57,8 @@ if [ ! -d ${DATA_DIR}/libs ]; then
 fi
 if [ ! -f ${DATA_DIR}/libs/sevenzipjbinding1509Linux.jar ]; then
 	cd ${DATA_DIR}/libs
-	if wget -q -nc --show-progress --progress=bar:force:noscroll https://github.com/ich777/runtimes/raw/master/jd/lib.tar.gz ; then
-		echo "---Successfully downloaded libraries---"
-	else
-		echo "---Something went wrong, can't download libraries, continuing---"
+	if [ ! -f ${DATA_DIR}/libs/lib.tar.gz ]; then
+		cp /tmp/lib.tar.gz ${DATA_DIR}/libs/lib.tar.gz
 	fi
     if [ -f ${DATA_DIR}/libs/lib.tar.gz ]; then
     	tar -xf ${DATA_DIR}/libs/lib.tar.gz
@@ -71,7 +69,9 @@ else
 fi
 if [ ! -f ${DATA_DIR}/libs/sevenzipjbinding1509.jar ]; then
 	cd ${DATA_DIR}/libs
-	wget -q -nc --show-progress --progress=bar:force:noscroll https://github.com/ich777/runtimes/raw/master/jd/lib.tar.gz
+	if [ ! -f ${DATA_DIR}/libs/lib.tar.gz ]; then
+		cp /tmp/lib.tar.gz ${DATA_DIR}/libs/lib.tar.gz
+	fi
     if [ -f ${DATA_DIR}/libs/lib.tar.gz ]; then
     	tar -xf ${DATA_DIR}/libs/lib.tar.gz
     	rm ${DATA_DIR}/libs/lib.tar.gz
