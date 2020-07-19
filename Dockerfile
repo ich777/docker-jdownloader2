@@ -12,8 +12,8 @@ RUN export TZ=Europe/Rome && \
 	locale-gen && \
 	rm -rf /var/lib/apt/lists/* && \
 	sed -i '/    document.title =/c\    document.title = "jDownloader2 - noVNC";' /usr/share/novnc/app/ui.js && \
-	wget -qi /tmp/JDownloader.jar https://github.com/ich777/docker-jdownloader2/raw/master/JD/JDownloader.jar && \
-	wget -qi /tmp/lib.tar.gz https://github.com/ich777/runtimes/raw/master/jd/lib.tar.gz && \
+	wget -qi -O /tmp/JDownloader.jar https://github.com/ich777/docker-jdownloader2/raw/master/JD/JDownloader.jar && \
+	wget -qi -O /tmp/lib.tar.gz https://github.com/ich777/runtimes/raw/master/jd/lib.tar.gz && \
 	rm /usr/share/novnc/app/images/icons/*
 
 
