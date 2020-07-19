@@ -33,7 +33,6 @@ else
 fi
 
 echo "---Checking for 'jDownloader.jar'---"
-sleep 5
 if [ ! -f ${DATA_DIR}/JDownloader.jar ]; then
 	echo "---'jDownloader.jar' not found, copying...---"
 	cd ${DATA_DIR}
