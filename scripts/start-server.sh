@@ -1,37 +1,4 @@
 #!/bin/bash
-echo "---Checking for 'runtime' folder---"
-if [ ! -d ${DATA_DIR}/runtime ]; then
-	echo "---'runtime' folder not found, creating...---"
-	mkdir ${DATA_DIR}/runtime
-else
-	echo "---'runtime' folder found---"
-fi
-
-echo "---Checking if Runtime is installed---"
-if [ -z "$(find ${DATA_DIR}/runtime -name jre*)" ]; then
-    if [ "${RUNTIME_NAME}" == "basicjre" ]; then
-    	echo "---Downloading and installing Runtime---"
-		cd ${DATA_DIR}/runtime
-		if wget -q -nc --show-progress --progress=bar:force:noscroll https://github.com/ich777/runtimes/raw/master/jre/basicjre.tar.gz ; then
-			echo "---Successfully downloaded Runtime!---"
-		else
-			echo "---Something went wrong, can't download Runtime, putting server in sleep mode---"
-			sleep infinity
-		fi
-        tar --directory ${DATA_DIR}/runtime -xvzf ${DATA_DIR}/runtime/basicjre.tar.gz
-        rm -R ${DATA_DIR}/runtime/basicjre.tar.gz
-    else
-    	if [ ! -d ${DATA_DIR}/runtime/${RUNTIME_NAME} ]; then
-        	echo "---------------------------------------------------------------------------------------------"
-        	echo "---Runtime not found in folder 'runtime' please check again! Putting server in sleep mode!---"
-        	echo "---------------------------------------------------------------------------------------------"
-        	sleep infinity
-        fi
-    fi
-else
-	echo "---Runtime found---"
-fi
-
 echo "---Checking for 'jDownloader.jar'---"
 if [ ! -f ${DATA_DIR}/JDownloader.jar ]; then
 	echo "---'jDownloader.jar' not found, copying...---"
@@ -145,6 +112,9 @@ sleep 2
 echo "---Starting noVNC server---"
 websockify -D --web=/usr/share/novnc/ --cert=/etc/ssl/novnc.pem 8080 localhost:5900
 sleep 2
+
+echo "---Container under construction, sleep ZzZ---"
+sleep infinity
 
 echo "---Starting jDownloader2---"
 export DISPLAY=:99
