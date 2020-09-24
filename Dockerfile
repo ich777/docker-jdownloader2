@@ -6,7 +6,14 @@ RUN export TZ=Europe/Rome && \
 	apt-get update && \
 	ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
 	echo $TZ > /etc/timezone && \
-	apt-get -y install --no-install-recommends fonts-takao && \
+	apt-get -y install --no-install-recommends fonts-takao software-properties-common gnupg2 && \
+	wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add - && \
+	add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ && \
+	mkdir -p /usr/share/man/man1 && \
+	apt-get update && \
+	apt-get -y install adoptopenjdk-8-hotspot && \
+	apt-get -y remove software-properties-common gnupg2 && \
+	apt-get -y autoremove && \
 	echo "ko_KR.UTF-8 UTF-8" >> /etc/locale.gen && \ 
 	echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen && \
 	locale-gen && \
