@@ -15,8 +15,6 @@ else
 fi
 
 echo "---Preparing Server---"
-export RUNTIME_NAME="$(ls -d ${DATA_DIR}/runtime/* | cut -d '/' -f4)"
-
 echo "---Checking libraries---"
 if [ ! -d ${DATA_DIR}/libs ]; then
 	mkdir ${DATA_DIR}/libs
@@ -113,10 +111,7 @@ echo "---Starting noVNC server---"
 websockify -D --web=/usr/share/novnc/ --cert=/etc/ssl/novnc.pem 8080 localhost:5900
 sleep 2
 
-echo "---Container under construction, sleep ZzZ---"
-sleep infinity
-
 echo "---Starting jDownloader2---"
 export DISPLAY=:99
 cd ${DATA_DIR}
-${DATA_DIR}/runtime/${RUNTIME_NAME}/bin/java -jar ${DATA_DIR}/JDownloader.jar
+/usr/bin/java -jar ${DATA_DIR}/JDownloader.jar
