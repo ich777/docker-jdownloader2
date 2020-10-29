@@ -18,6 +18,8 @@ fi
 echo "---Starting...---"
 chown -R ${UID}:${GID} /opt/scripts
 chown -R ${UID}:${GID} ${DATA_DIR}
+chown ${UID}:${GID} /mnt
+chmod ${DATA_PERM} /mnt
 
 term_handler() {
 	kill -SIGTERM "$(pidof java)"
