@@ -33,8 +33,52 @@ docker run --name jDownloader2 -d \
 	ich777/jdownloader2
 ```
 
-### Webgui address: http://[SERVERIP]:[PORT]/vnc_auto.html
+### Webgui address: http://[SERVERIP]:[PORT]/vnc.html?autoconnect=true
 
+
+#### Reverse Proxy with nginx example:
+
+```
+server {
+	listen 443 ssl;
+
+	include /config/nginx/ssl.conf;
+	include /config/nginx/error.conf;
+
+	server_name jdownloader2.example.com;
+
+	location /websockify {
+		auth_basic           example.com;
+		auth_basic_user_file /config/nginx/.htpasswd;
+		proxy_http_version 1.1;
+		proxy_pass http://192.168.1.1:8080/;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+
+		# VNC connection timeout
+		proxy_read_timeout 61s;
+
+		# Disable cache
+		proxy_buffering off;
+	}
+		location / {
+		rewrite ^/$ https://jdownloader2.example.com/vnc.html?autoconnect=true redirect;
+		auth_basic           example.com;
+		auth_basic_user_file /config/nginx/.htpasswd;
+		proxy_redirect     off;
+		proxy_set_header Range $http_range;
+		proxy_set_header If-Range $http_if_range;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header Host $host;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+		proxy_pass http://192.168.1.1:8080/;
+	}
+}
+```
 
 This Docker was mainly edited for better use with Unraid, if you don't use Unraid you should definitely try it!
 
