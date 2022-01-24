@@ -101,27 +101,14 @@ echo "---Window resolution: ${CUSTOM_RES_W}x${CUSTOM_RES_H}---"
 
 chmod -R ${DATA_PERM} ${DATA_DIR}
 
-echo "---Starting Xvfb server---"
-screen -S Xvfb -L -Logfile ${DATA_DIR}/XvfbLog.0 -d -m /opt/scripts/start-Xvfb.sh
-sleep 2
-echo "---Starting x11vnc server---"
-screen -S x11vnc -L -Logfile ${DATA_DIR}/x11vncLog.0 -d -m /opt/scripts/start-x11.sh
+echo "---Starting TurboVNC server---"
+vncserver -geometry ${CUSTOM_RES_W}x${CUSTOM_RES_H} -depth ${CUSTOM_DEPTH} :99 -rfbport ${RFB_PORT} -noxstartup ${TURBOVNC_PARAMS} 2>/dev/null
 sleep 2
 echo "---Starting noVNC server---"
-websockify -D --web=/usr/share/novnc/ --cert=/etc/ssl/novnc.pem 8080 localhost:5900
+websockify -D --web=/usr/share/novnc/ --cert=/etc/ssl/novnc.pem ${NOVNC_PORT} localhost:${RFB_PORT}
 sleep 2
-
-echo "+-------------------------------------------------------------"
-echo "|"
-echo "| This container for ARM is deprecated and is no"
-echo "| longer actively maintained or further developed!"
-echo "|"
-echo "|  Container will start in 60 seconds!"
-echo "|"
-echo "+-------------------------------------------------------------"
-sleep 60
 
 echo "---Starting jDownloader2---"
 export DISPLAY=:99
 cd ${DATA_DIR}
-/usr/bin/java -jar ${DATA_DIR}/JDownloader.jar
+${DATA_DIR}/runtime/${RUNTIME_NAME}/bin/java -jar ${DATA_DIR}/JDownloader.jar
