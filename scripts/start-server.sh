@@ -111,4 +111,4 @@ sleep 2
 echo "---Starting jDownloader2---"
 export DISPLAY=:99
 cd ${DATA_DIR}
-${DATA_DIR}/runtime/${RUNTIME_NAME}/bin/java -jar ${DATA_DIR}/JDownloader.jar
+/usr/bin/java -jar ${DATA_DIR}/JDownloader.jar
