@@ -1,4 +1,5 @@
 #!/bin/bash
+export DISPLAY=:99
 export XAUTHORITY=${DATA_DIR}/.Xauthority
 
 echo "---Checking for 'runtime' folder---"
@@ -145,11 +146,13 @@ echo "---Window resolution: ${CUSTOM_RES_W}x${CUSTOM_RES_H}---"
 echo "---Starting TurboVNC server---"
 vncserver -geometry ${CUSTOM_RES_W}x${CUSTOM_RES_H} -depth ${CUSTOM_DEPTH} :99 -rfbport ${RFB_PORT} -noxstartup ${TURBOVNC_PARAMS} 2>/dev/null
 sleep 2
+echo "---Starting Fluxbox---"
+screen -d -m env HOME=/etc /usr/bin/fluxbox
+sleep 2
 echo "---Starting noVNC server---"
 websockify -D --web=/usr/share/novnc/ --cert=/etc/ssl/novnc.pem ${NOVNC_PORT} localhost:${RFB_PORT}
 sleep 2
 
 echo "---Starting jDownloader2---"
-export DISPLAY=:99
 cd ${DATA_DIR}
 ${DATA_DIR}/runtime/${RUNTIME_NAME}/bin/java -jar ${DATA_DIR}/JDownloader.jar
