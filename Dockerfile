@@ -8,6 +8,7 @@ RUN export TZ=Europe/Rome && \
 	ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
 	echo $TZ > /etc/timezone && \
 	apt-get -y install --no-install-recommends fonts-takao && \
+	apt-get -y install ffmpeg && \
 	echo "ko_KR.UTF-8 UTF-8" >> /etc/locale.gen && \ 
 	echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen && \
 	locale-gen && \
