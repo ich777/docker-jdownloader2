@@ -29,6 +29,10 @@ chown -R ${UID}:${GID} ${DATA_DIR}
 chown ${UID}:${GID} /mnt
 chmod ${DATA_PERM} /mnt
 
+if [ ! -z "${CONNECTED_CONTAINERS}" ]; then
+  su ${USER} -c "/opt/scripts/start-connected-containers.sh" &
+fi
+
 echo "---Starting...---"
 term_handler() {
 	kill -SIGTERM "$(pidof java)"
