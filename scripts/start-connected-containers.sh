@@ -6,8 +6,8 @@ if [ -z "${CONNECTED_CONTAINERS%%:*}" ] || [ -z "${CONNECTED_CONTAINERS#*:}" ] |
   exit 1
 fi
 
-# Wait 5 seconds to start the connection
-sleep 5
+# Wait 10 seconds to start the connection
+sleep 10
 echo "---Starting connected containers watchdog on ${CONNECTED_CONTAINERS}---"
 nc ${CONNECTED_CONTAINERS%%:*} ${CONNECTED_CONTAINERS#*:}
 EXIT_STATUS=$?
@@ -17,7 +17,8 @@ if [ "${EXIT_STATUS}" != 0 ]; then
   echo "---Couldn't connect to: ${CONNECTED_CONTAINERS%%:*} on port: ${CONNECTED_CONTAINERS#*:}"
   exit 1
 else
-  echo "---Connection to connected container: ${CONNECTED_CONTAINERS} lost, restarting in 5 seconds...---"
-  sleep 5
+  echo "---Connection to connected container: ${CONNECTED_CONTAINERS} lost, restarting in 10 seconds...---"
+  sleep 10
+
   kill -SIGTERM $(pidof java)
 fi
