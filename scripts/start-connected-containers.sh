@@ -19,6 +19,5 @@ if [ "${EXIT_STATUS}" != 0 ]; then
 else
   echo "---Connection to connected container: ${CONNECTED_CONTAINERS} lost, restarting in 10 seconds...---"
   sleep 10
-
   kill -SIGTERM $(pidof java)
 fi
