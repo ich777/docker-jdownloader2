@@ -17,7 +17,7 @@ if [ "${EXIT_STATUS}" != 0 ]; then
   echo "---Couldn't connect to: ${CONNECTED_CONTAINERS%%:*} on port: ${CONNECTED_CONTAINERS#*:}"
   exit 1
 else
-  echo "---Connection to connected container: ${CONNECTED_CONTAINERS} lost, restarting in 10 seconds...---"
-  sleep 10
+  echo "---Connection to connected container: ${CONNECTED_CONTAINERS} lost, restarting in ${CONNECTED_CONTAINERS_TIMEOUT} seconds...---"
+  sleep ${CONNECTED_CONTAINERS_TIMEOUT}s
   kill -SIGTERM $(pidof java)
 fi
