@@ -155,4 +155,4 @@ sleep 2
 
 echo "---Starting jDownloader2---"
 cd ${DATA_DIR}
-${DATA_DIR}/runtime/${RUNTIME_NAME}/bin/java -jar ${DATA_DIR}/JDownloader.jar
+eval ${DATA_DIR}/runtime/${RUNTIME_NAME}/bin/java ${EXTRA_JVM_PARAMS} -jar ${DATA_DIR}/JDownloader.jar
